@@ -2,7 +2,7 @@ import {Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryColumn} from "t
 import {BugsEntity} from "./bugs.entity";
 import {DevicesEntity} from "./devices.entity";
 
-@Entity('testers')
+@Entity({name: 'testers'})
 export class TestersEntity {
 
   @PrimaryColumn({type: 'bigint'})
