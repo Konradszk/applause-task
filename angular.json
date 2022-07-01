@@ -1,0 +1,8 @@
+{
+  "version": 2,
+  "projects": {
+    "api": "apps/api",
+    "applause": "apps/applause",
+    "applause-e2e": "apps/applause-e2e"
+  }
+}
