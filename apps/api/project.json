@@ -46,6 +46,27 @@
         "jestConfig": "apps/api/jest.config.js",
         "passWithNoTests": true
       }
+    },
+    "migrate-generate": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "npx @nestjs/cli build -p tsconfig.app.json && cd ../../ && ./node_modules/.bin/ts-node ./node_modules/.bin/typeorm -f ./apps/api/ormconfig.js migration:generate -n migrate",
+        "cwd": "apps/api"
+      }
+    },
+    "migrate-run": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "../../node_modules/.bin/ts-node ../../node_modules/.bin/typeorm -f ormconfig.js migration:run",
+        "cwd": "apps/api"
+      }
+    },
+    "migrate-revert": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "../../node_modules/.bin/ts-node ../../node_modules/.bin/typeorm -f ormconfig.js migration:revert",
+        "cwd": "apps/api"
+      }
     }
   },
   "tags": []
