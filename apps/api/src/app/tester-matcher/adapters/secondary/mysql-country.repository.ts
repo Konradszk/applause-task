@@ -16,6 +16,7 @@ export class MysqlCountryRepository  implements GetsCountriesDtoPort {
       .select('country')
       .distinct(true)
       .getRawMany()).pipe(
+        map(entity => entity.map(entity => entity.country)),
         map((countries: string[] ) => countries.map(country => ({name : country})))
     );
   }
