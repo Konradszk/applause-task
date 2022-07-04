@@ -8,5 +8,14 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Countries</mat-label>
+    <mat-select [formControlName]="'country'">
+      <mat-option *ngFor="let country of countries$ | async" [value]="country.code">
+        {{country.code}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
   <button mat-button color="accent" type="submit" [disabled]="form.invalid">Search</button>
 </form>

@@ -11,6 +11,15 @@ import {HttpDeviceService} from "./adapters/secondary/http-device.service";
 import {HttpClientModule} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
+import {GETS_COUNTRIES_QUERY_PORT} from "./application/port/primary/gets-countries.query-port";
+import {GetsCountriesQueryHandler} from "./application/query-handler/gets-countries.query-handler";
+import {GETS_COUNTRIES_DTO_PORT} from "./application/port/secondary/gets-countries.dto-port";
+import {HttpCountryService} from "./adapters/secondary/http-country-service";
+import {SEARCHES_TESTERS_COMMAND_PORT} from "./application/port/primary/searches-testers.command-port";
+import {GETS_TESTERS_QUERY_PORT} from "./application/port/primary/gets-testers.query-port";
+import {TestersState} from "./application/state/testers.state";
+import {TESTER_STORAGE} from "./application/port/secondary/tester.storage";
+import {ReplaySubject} from "rxjs";
 
 @NgModule({
   imports: [CommonModule,
@@ -21,6 +30,7 @@ import {MatButtonModule} from "@angular/material/button";
   ],
   declarations: [TesterMatcherPageComponent, SearchTestersComponent],
   providers: [
+    TestersState,
     {
       provide: GETS_ALL_DEVICES_QUERY_PORT,
       useClass: GetsAllDeviceQueryHandler
@@ -28,6 +38,26 @@ import {MatButtonModule} from "@angular/material/button";
     {
       provide: GETS_ALL_DEVICES_DTO_PORT,
       useClass: HttpDeviceService
+    },
+    {
+      provide: GETS_COUNTRIES_QUERY_PORT,
+      useClass: GetsCountriesQueryHandler
+    },
+    {
+      provide: GETS_COUNTRIES_DTO_PORT,
+      useClass: HttpCountryService
+    },
+    {
+      provide: SEARCHES_TESTERS_COMMAND_PORT,
+      useExisting: TestersState
+    },
+    {
+      provide: GETS_TESTERS_QUERY_PORT,
+      useExisting: TestersState
+    },
+    {
+      provide: TESTER_STORAGE,
+      useValue: new ReplaySubject(1)
     }
   ]
 })
