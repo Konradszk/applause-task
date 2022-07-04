@@ -1,0 +1,12 @@
+<p class="text-center">Select criteria and find testers!</p>
+<form class="d-flex justify-content-between" [formGroup]="form" (ngSubmit)="search()">
+  <mat-form-field>
+    <mat-label>Devices</mat-label>
+    <mat-select [formControlName]="'device'">
+      <mat-option *ngFor="let device of devices$ | async" [value]="device.id">
+        {{device.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-button color="accent" type="submit" [disabled]="form.invalid">Search</button>
+</form>

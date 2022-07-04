@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TesterMatcherPageComponent } from './tester-matcher-page.component';
+import {NO_ERRORS_SCHEMA} from "@angular/core";
 
 describe('TesterMatcherPageComponent', () => {
   let component: TesterMatcherPageComponent;
@@ -8,7 +9,8 @@ describe('TesterMatcherPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TesterMatcherPageComponent ]
+      declarations: [ TesterMatcherPageComponent ],
+      schemas: [NO_ERRORS_SCHEMA],
     })
     .compileComponents();
   });
