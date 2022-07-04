@@ -24,8 +24,8 @@ export class TestersState implements SearchesTestersCommandPort, GetsTestersQuer
 
   search(command: SearchTestersCommand): Observable<void> {
     const searchData: TesterCriteria = {
-      countryCodes: command.countryId !== 'ALL' ? [command.countryId] : null,
-      deviceIds: command.deviceId !== 'ALL' ? [command.deviceId] : null
+      countryCodes: !command.countryId.includes('ALL') ? command.countryId.filter(v => v !== 'ALL') : null,
+      deviceIds: !command.deviceId.includes('ALL') ? command.deviceId.filter(v => v !== 'ALL') : null
     };
 
     this._testerStorage.next(null);

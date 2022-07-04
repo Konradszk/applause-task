@@ -1,9 +1,9 @@
-import {ChangeDetectionStrategy, Component, Inject} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {
   GETS_ALL_DEVICES_QUERY_PORT,
   GetsAllDevicesQueryPort
 } from "../../../../application/port/primary/gets-all-devices.query-port";
-import {Observable} from "rxjs";
+import {filter, Observable, Subject, takeUntil} from "rxjs";
 import {DeviceQuery} from "../../../../application/port/primary/device.query";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {
@@ -16,11 +16,6 @@ import {
   SearchesTestersCommandPort
 } from "../../../../application/port/primary/searches-testers.command-port";
 import {SearchTestersCommand} from "../../../../application/port/primary/search-testers.command";
-import {
-  GETS_TESTERS_QUERY_PORT,
-  GetsTestersQueryPort
-} from "../../../../application/port/primary/gets-testers.query-port";
-import {TesterQuery} from "../../../../application/port/primary/tester.query";
 
 @Component({
   selector: 'applause-search-testers',
@@ -28,7 +23,7 @@ import {TesterQuery} from "../../../../application/port/primary/tester.query";
   styleUrls: ['./search-testers.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchTestersComponent {
+export class SearchTestersComponent implements OnInit, OnDestroy {
 
   public devices$: Observable<DeviceQuery[]> = this._getsDevices.getAllDevices();
   public countries$: Observable<CountryQuery[]> = this._getsCountries.getCountries();
@@ -36,6 +31,8 @@ export class SearchTestersComponent {
     device: new FormControl(undefined, Validators.required),
     country: new FormControl(undefined, Validators.required),
   });
+  private _ngUnsub = new Subject<void>();
+
 
   constructor(
     private _fb: FormBuilder,
@@ -45,8 +42,27 @@ export class SearchTestersComponent {
   ) {
   }
 
+  ngOnInit(): void {
+    this._handleAllOption('country');
+    this._handleAllOption('device');
+  }
+
+  private _handleAllOption(formName: 'country' | 'device') {
+    this.form.controls[formName].valueChanges.pipe(
+      filter((values: string[]) => values.includes('ALL')),
+      takeUntil(this._ngUnsub)
+    ).subscribe(() => {
+      this.form.controls[formName].patchValue(['ALL'], {emitEvent: false});
+    })
+  }
+
   search(): void {
     const data = this.form.value;
     this._searchesTesters.search(new SearchTestersCommand(data.device, data.country)).subscribe()
+  }
+
+  ngOnDestroy(): void {
+    this._ngUnsub.next();
+    this._ngUnsub.complete();
   }
 }
