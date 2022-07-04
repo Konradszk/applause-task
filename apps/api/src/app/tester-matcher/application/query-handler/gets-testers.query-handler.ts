@@ -18,7 +18,8 @@ export class GetsTestersQueryHandler implements GetsTestersQueryPort {
   getTesters({countries, deviceIds}: TestersCriteria): Observable<TesterQuery[]> {
     return this._validate(countries, deviceIds).pipe(
       switchMap(() => this._getsTesters.getsTesters(deviceIds, countries).pipe(
-        map(dtos => dtos.map(dto => new TesterQuery(dto.id, dto.firstName, dto.lastName, dto.score)))
+        map(dtos => dtos.map(dto => new TesterQuery(dto.id, dto.firstName, dto.lastName, dto.score))),
+        map(queries => queries.sort((a, b) => b.score - a.score))
       ))
     );
   }
