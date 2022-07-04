@@ -10,12 +10,12 @@ import {CountryCollectionJsonApi} from "./response/country-collection.json-api";
 export class CountryController {
 
   constructor(
-    @Inject(GETS_COUNTRIES_QUERY_PORT) private getsCountries: GetsCountriesQueryPort
+    @Inject(GETS_COUNTRIES_QUERY_PORT) private _getsCountries: GetsCountriesQueryPort
   ) {
   }
   @Get()
   public getCountries(): Observable<CountryCollectionJsonApi> {
-    return this.getsCountries.getCountries().pipe(
+    return this._getsCountries.getCountries().pipe(
       map(queries => CountryCollectionJsonApi.fromQueries(queries))
     )
   }

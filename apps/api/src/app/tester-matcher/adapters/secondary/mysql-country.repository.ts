@@ -8,11 +8,11 @@ import {InjectRepository} from "@nestjs/typeorm";
 @Injectable()
 export class MysqlCountryRepository  implements GetsCountriesDtoPort {
   constructor(
-    @InjectRepository(TestersEntity) private repo: Repository<TestersEntity>
+    @InjectRepository(TestersEntity) private _repo: Repository<TestersEntity>
   ) {
   }
   getCountries(): Observable<Country[]> {
-    return from(this.repo.createQueryBuilder()
+    return from(this._repo.createQueryBuilder()
       .select('country')
       .distinct(true)
       .getRawMany()).pipe(

@@ -8,12 +8,12 @@ import {DeviceCollectionJsonApi} from "./response/device-collection.json-api";
 
 @Controller('devices')
 export class DevicesController {
-  constructor(@Inject(GETS_ALL_DEVICES_QUERY_PORT) private getsDevices: GetsAllDevicesQueryPort) {
+  constructor(@Inject(GETS_ALL_DEVICES_QUERY_PORT) private _getsDevices: GetsAllDevicesQueryPort) {
   }
 
   @Get()
   public getAllDevices(): Observable<DeviceCollectionJsonApi> {
-    return this.getsDevices.getAllDevices().pipe(
+    return this._getsDevices.getAllDevices().pipe(
       map(queries => DeviceCollectionJsonApi.fromQueries(queries))
     );
   }

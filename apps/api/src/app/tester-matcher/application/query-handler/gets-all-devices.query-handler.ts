@@ -7,11 +7,11 @@ import {GETS_ALL_DEVICES_DTO_PORT, GetsAllDevicesDtoPort} from "../port/secondar
 @Injectable()
 export class GetsAllDevicesQueryHandler implements GetsAllDevicesQueryPort {
 
-  constructor(@Inject(GETS_ALL_DEVICES_DTO_PORT) private getsDevices: GetsAllDevicesDtoPort) {
+  constructor(@Inject(GETS_ALL_DEVICES_DTO_PORT) private _getsDevices: GetsAllDevicesDtoPort) {
   }
 
   getAllDevices(): Observable<DeviceQuery[]> {
-    return this.getsDevices.getAllDevices().pipe(
+    return this._getsDevices.getAllDevices().pipe(
       map(dtos => dtos.map(dto => new DeviceQuery(dto.id, dto.name)))
     );
   }
