@@ -20,6 +20,7 @@ import {
   GETS_TESTERS_QUERY_PORT,
   GetsTestersQueryPort
 } from "../../../../application/port/primary/gets-testers.query-port";
+import {TesterQuery} from "../../../../application/port/primary/tester.query";
 
 @Component({
   selector: 'applause-search-testers',
@@ -41,7 +42,6 @@ export class SearchTestersComponent {
     @Inject(GETS_ALL_DEVICES_QUERY_PORT) private _getsDevices: GetsAllDevicesQueryPort,
     @Inject(GETS_COUNTRIES_QUERY_PORT) private _getsCountries: GetsCountriesQueryPort,
     @Inject(SEARCHES_TESTERS_COMMAND_PORT) private _searchesTesters: SearchesTestersCommandPort,
-    @Inject(GETS_TESTERS_QUERY_PORT) private _getsTesters: GetsTestersQueryPort
   ) {
   }
 

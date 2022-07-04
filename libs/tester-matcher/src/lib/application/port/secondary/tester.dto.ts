@@ -1,4 +1,5 @@
 export interface TesterDTO {
-  name: string,
+  firstName: string,
+  lastName: string,
   rate: number
 }

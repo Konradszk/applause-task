@@ -20,10 +20,6 @@ import {
   SEARCHES_TESTERS_COMMAND_PORT,
   SearchesTestersCommandPort
 } from "../../../../application/port/primary/searches-testers.command-port";
-import {
-  GETS_TESTERS_QUERY_PORT,
-  GetsTestersQueryPort
-} from "../../../../application/port/primary/gets-testers.query-port";
 
 describe('SearchTestersComponent', () => {
   let component: SearchTestersComponent;
@@ -51,10 +47,6 @@ describe('SearchTestersComponent', () => {
         {
           provide: SEARCHES_TESTERS_COMMAND_PORT,
           useValue: <SearchesTestersCommandPort>{search: jest.fn(() => of(void 0))}
-        },
-        {
-          provide: GETS_TESTERS_QUERY_PORT,
-          useValue: <GetsTestersQueryPort>{getTesters: jest.fn(() => of([]))}
         }
       ]
     }).compileComponents();
