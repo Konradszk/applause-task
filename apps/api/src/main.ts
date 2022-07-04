@@ -1,5 +1,5 @@
 
-import { Logger } from '@nestjs/common';
+import {Logger, ValidationPipe} from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import * as helmet from 'helmet';
 import * as bodyParser from 'body-parser';
@@ -13,6 +13,11 @@ async function bootstrap() {
   const port = process.env.PORT || 3333;
   app.use(helmet());
   app.enableCors();
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+    }),
+  );
   app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
   await app.listen(port);
   Logger.log(
