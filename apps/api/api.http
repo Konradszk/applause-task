@@ -1,0 +1,9 @@
+GET localhost:3333/api/countries
+
+#####
+
+GET localhost:3333/api/devices
+
+
+#####
+
