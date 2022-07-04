@@ -1,7 +1,7 @@
 # ApplauseTest
 
 ![](https://github.com/Konradszk/applause-task/blob/main/result.gif)
-https://github.com/Konradszk/applause-task/blob/main/result.mov
+[video link](https://github.com/Konradszk/applause-task/blob/main/result.mov)
 
 ## Set up project
 ### Server
@@ -12,10 +12,10 @@ https://github.com/Konradszk/applause-task/blob/main/result.mov
   - Login: root
   - Password: konrad
   - Server: mysql
-- create user with credentials from [env](.env), set all privileges
+- create user with credentials from [env](apps/api/.env), set all privileges
 - logout from root
-- log in using credentials from [env](.env) file
-- create database named like in [env](.env) file
+- log in using credentials from [env](apps/api/.env) file
+- create database named like in [env](apps/api/.env) file
 - run command `nx run api:migrate-run`
 - run command `nx serve api`
 
