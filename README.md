@@ -1,7 +1,6 @@
 # ApplauseTest
 
-![](https://github.com/Konradszk/applause-task/result.gif)
-
+![](https://github.com/Konradszk/applause-task/blob/main/result.gif)
 
 ## Set up project
 ### Server
