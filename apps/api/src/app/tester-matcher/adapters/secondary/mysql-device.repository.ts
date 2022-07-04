@@ -1,12 +1,13 @@
 import {DeviceDTO, GetsAllDevicesDtoPort} from "../../application/port/secondary/gets-all-devices.dto-port";
 import {Injectable} from "@nestjs/common";
-import {from, map, Observable} from "rxjs";
+import {from, map, Observable, of} from "rxjs";
 import {InjectRepository} from "@nestjs/typeorm";
 import {DevicesEntity} from "./entity/devices.entity";
-import {Repository} from "typeorm";
+import {In, Repository} from "typeorm";
+import {ValidatesDevicesDtoPort} from "../../application/port/secondary/validates-devices.dto-port";
 
 @Injectable()
-export class MysqlDeviceRepository implements GetsAllDevicesDtoPort {
+export class MysqlDeviceRepository implements GetsAllDevicesDtoPort, ValidatesDevicesDtoPort {
   constructor(
     @InjectRepository(DevicesEntity) private _repo: Repository<DevicesEntity>
   ) {
@@ -22,4 +23,12 @@ export class MysqlDeviceRepository implements GetsAllDevicesDtoPort {
     );
   }
 
+  checkIds(...ids: number[]): Observable<boolean> {
+    if (!ids || !ids.length) {
+      return of(true)
+    }
+    return from(this._repo.countBy({deviceId: In(ids)})).pipe(
+      map(count => count === ids.length)
+    );
+  }
 }

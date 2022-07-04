@@ -13,14 +13,22 @@ import {GetsAllDevicesQueryHandler} from "./application/query-handler/gets-all-d
 import {GETS_ALL_DEVICES_DTO_PORT} from "./application/port/secondary/gets-all-devices.dto-port";
 import {MysqlDeviceRepository} from "./adapters/secondary/mysql-device.repository";
 import {DevicesController} from "./adapters/primary/devices.controller";
+import {TestersController} from "./adapters/primary/testers.controller";
+import {GETS_TESTERS_QUERY_PORT} from "./application/port/primary/gets-testers.query-port";
+import {GetsTestersQueryHandler} from "./application/query-handler/gets-testers.query-handler";
+import {GETS_TESTERS_DTO_PORT} from "./application/port/secondary/gets-testers.dto-port";
+import {MysqlTesterRepository} from "./adapters/secondary/mysql-tester.repository";
+import {VALIDATES_DEVICES_DTO_PORT} from "./application/port/secondary/validates-devices.dto-port";
+import {VALIDATES_COUNTRIES_DTO_PORT} from "./application/port/secondary/validates-countries.dto-port";
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([TestersEntity, DevicesEntity, BugsEntity])
   ],
-  controllers: [CountryController, DevicesController],
+  controllers: [CountryController, DevicesController, TestersController],
   providers: [
     MysqlCountryRepository,
+    MysqlDeviceRepository,
     {
       provide: GETS_COUNTRIES_QUERY_PORT,
       useClass: GetsCountriesQueryHandler
@@ -35,7 +43,23 @@ import {DevicesController} from "./adapters/primary/devices.controller";
     },
     {
       provide: GETS_ALL_DEVICES_DTO_PORT,
-      useClass: MysqlDeviceRepository
+      useExisting: MysqlDeviceRepository
+    },
+    {
+      provide: GETS_TESTERS_QUERY_PORT,
+      useClass: GetsTestersQueryHandler
+    },
+    {
+      provide: GETS_TESTERS_DTO_PORT,
+      useClass: MysqlTesterRepository
+    },
+    {
+      provide: VALIDATES_DEVICES_DTO_PORT,
+      useExisting: MysqlDeviceRepository
+    },
+    {
+      provide: VALIDATES_COUNTRIES_DTO_PORT,
+      useExisting: MysqlCountryRepository
     }]
 })
 export class TesterMatcherModule {

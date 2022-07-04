@@ -18,7 +18,7 @@ export class TestersState implements SearchesTestersCommandPort, GetsTestersQuer
 
   getTesters(): Observable<TesterQuery[] | undefined> {
     return this._testerStorage.pipe(
-      map(testers => testers?.map(tester => new TesterQuery(tester.rate, tester.firstName, tester.lastName)))
+      map(testers => testers?.map(tester => new TesterQuery(tester.score, tester.firstName, tester.lastName)))
     );
   }
 

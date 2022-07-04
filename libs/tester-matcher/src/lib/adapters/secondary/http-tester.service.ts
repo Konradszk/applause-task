@@ -18,7 +18,7 @@ export class HttpTesterService implements FindsTestersDtoPort {
   }
 
   findTesters(options: TesterCriteria): Observable<TesterDTO[]> {
-    const params = stringify(options);
+    const params = stringify(options, {skipNulls: true});
     return this._http.get<HasDataCollection<TesterDTO>>(`${this._url}?${params}`).pipe(
       map(res => res.data.map(data => data.attributes))
     );
