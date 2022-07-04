@@ -60,21 +60,21 @@
     "migrate-generate": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "command": "npx @nestjs/cli build -p tsconfig.app.json && cd ../../ && ./node_modules/.bin/ts-node ./node_modules/.bin/typeorm -f ./apps/api/ormconfig.js migration:generate -n migrate",
+        "command": "npx @nestjs/cli build -p tsconfig.app.json && ../../node_modules/.bin/ts-node ../../node_modules/.bin/typeorm migration:generate -- -d ./ormconfig.js",
         "cwd": "apps/api"
       }
     },
     "migrate-run": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "command": "../../node_modules/.bin/ts-node ../../node_modules/.bin/typeorm -f ormconfig.js migration:run",
+        "command": "tsc ./ormconfig.ts && ../../node_modules/.bin/ts-node ../../node_modules/.bin/typeorm migration:run -d ./ormconfig.js",
         "cwd": "apps/api"
       }
     },
     "migrate-revert": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "@nrwl/workspace:run-commands ",
       "options": {
-        "command": "../../node_modules/.bin/ts-node ../../node_modules/.bin/typeorm -f ormconfig.js migration:revert",
+        "command": "tsc ./ormconfig.ts && ../../node_modules/.bin/ts-node ../../node_modules/.bin/typeorm migration:run -d ./ormconfig.js",
         "cwd": "apps/api"
       }
     }
