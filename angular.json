@@ -3,6 +3,7 @@
   "projects": {
     "api": "apps/api",
     "applause": "apps/applause",
-    "applause-e2e": "apps/applause-e2e"
+    "applause-e2e": "apps/applause-e2e",
+    "tester-matcher": "libs/tester-matcher"
   }
 }

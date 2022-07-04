@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@applause-test/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@applause-test/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@applause/tester-matcher": ["libs/tester-matcher/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

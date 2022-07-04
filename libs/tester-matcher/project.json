@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/tester-matcher",
+  "sourceRoot": "libs/tester-matcher/src",
+  "prefix": "applause",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/tester-matcher"],
+      "options": {
+        "jestConfig": "libs/tester-matcher/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/tester-matcher/src/**/*.ts",
+          "libs/tester-matcher/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
