@@ -6,7 +6,9 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/applause",
         "index": "apps/applause/src/index.html",
@@ -14,8 +16,14 @@
         "polyfills": "apps/applause/src/polyfills.ts",
         "tsConfig": "apps/applause/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/applause/src/favicon.ico", "apps/applause/src/assets"],
-        "styles": ["apps/applause/src/styles.scss"],
+        "assets": [
+          "apps/applause/src/favicon.ico",
+          "apps/applause/src/assets"
+        ],
+        "styles": [
+          "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
+          "apps/applause/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -83,7 +91,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/applause"],
+      "outputs": [
+        "coverage/apps/applause"
+      ],
       "options": {
         "jestConfig": "apps/applause/jest.config.js",
         "passWithNoTests": true
