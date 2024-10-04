@@ -1,4 +1,4 @@
-# ApplauseTest
+# ApplauseTest - recruitment task
 
 ![](https://github.com/Konradszk/applause-task/blob/main/result.gif)
 [video link](https://github.com/Konradszk/applause-task/blob/main/result.mov)
